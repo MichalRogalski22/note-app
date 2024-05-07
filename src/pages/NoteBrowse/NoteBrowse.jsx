@@ -10,10 +10,10 @@ export function NoteBrowse() {
   const filteredNoteList = noteList.filter((note) => {
     const containsTitle = note.title
       .toUpperCase()
-      .includes(searchTerm.toUpperCase());
+      .includes(searchTerm.trim().toUpperCase());
     const containsContent = note.content
       .toUpperCase()
-      .includes(searchTerm.toUpperCase());
+      .includes(searchTerm.trim().toUpperCase());
     return containsTitle || containsContent;
   });
   return (
