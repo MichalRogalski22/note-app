@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
-import { ValidatorService } from "services/validator";
+import { ValidatorService } from "utils/validator";
 import FieldError from "components/FieldError/FieldError";
 
 const VALIDATOR = {
@@ -20,9 +20,12 @@ const NoteForm = ({
   title,
   onClickEdit,
   onClickDelete,
-  onSubmit
+  onSubmit,
 }) => {
-  const [formValues, setFormValues] = useState({ title: note?.title || "", content: note?.content || "" });
+  const [formValues, setFormValues] = useState({
+    title: note?.title || "",
+    content: note?.content || "",
+  });
   const [formErrors, setFormErrors] = useState({
     title: note?.title ? undefined : true,
     content: note?.content ? undefined : true,

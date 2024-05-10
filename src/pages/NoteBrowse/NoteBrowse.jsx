@@ -1,5 +1,6 @@
 import SearchBar from "components/SearchBar/SearchBar";
 import NoteList from "containers/NoteList";
+import { withAuthRequired } from "hoc/withAuthRequired";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
