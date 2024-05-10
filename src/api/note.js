@@ -6,7 +6,8 @@ import {
   orderBy,
   query,
   doc,
-  updateDoc
+  updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { FirebaseApp } from "utils/firebase";
 
@@ -32,14 +33,23 @@ export class NoteAPI {
     });
   }
   static async deleteById(noteId) {
-    deleteDoc(doc(FirebaseApp.db, "notes", noteId))
+    deleteDoc(doc(FirebaseApp.db, "notes", noteId));
   }
   static async updateById(id, values) {
     const query = doc(FirebaseApp.db, "notes", id);
     await updateDoc(query, values);
     return {
       id,
-     ...values,
+      ...values,
     };
+  }
+
+  static onShouldSynchronizeNotes(onChange) {
+    const q = query(collection(FirebaseApp.db, "notes"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const isUserPerformingChange = querySnapshot.metadata.hasPendingWrites;
+      !isUserPerformingChange && onChange();
+    });
+    return unsub;
   }
 }
