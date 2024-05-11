@@ -1,13 +1,12 @@
 import { NoteAPI } from "api/note";
 import { Header } from "components/Header/Header";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { setNoteList } from "store/notes/notes-slice";
 import s from "./style.module.css";
 import { withAuthRequired } from "hoc/withAuthRequired";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
-import { getAuth } from "firebase/auth";
 import { FirebaseApp } from "utils/firebase";
 
 export function App() {
@@ -22,7 +21,6 @@ export function App() {
   useEffect(() => {
     FirebaseApp.auth.onAuthStateChanged((user) => {
       if (user.uid) {
-        console.log("Firebase");
         const unsub = NoteAPI.onShouldSynchronizeNotes(fetchNotes());
         return () => {
           unsub();
