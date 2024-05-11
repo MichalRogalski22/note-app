@@ -9,9 +9,10 @@ import { withAuthRequired } from "hoc/withAuthRequired";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
 import { FirebaseApp } from "utils/firebase";
 
-export function App() {
+export function App(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isIndexPage = window.location.pathname === "/";
 
   async function fetchNotes() {
     const noteList = await NoteAPI.fetchAll();
@@ -34,9 +35,9 @@ export function App() {
       <Header />
       <ButtonPrimary
         className={s.buttonAdd}
-        onClick={() => navigate("/note/new")}
+        onClick={() => navigate(isIndexPage ? "/note/new" : "/")}
       >
-        +
+        {isIndexPage ? "+" : "<"}
       </ButtonPrimary>
       <div className={s.workspace}>
         <Outlet />
