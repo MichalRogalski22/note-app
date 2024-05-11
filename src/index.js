@@ -2,7 +2,6 @@ import "./index.css";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
-import { StrictMode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteBrowse } from "pages/NoteBrowse/NoteBrowse";
 import NoteCreate from "pages/NoteCreate/NoteCreate";
@@ -18,7 +17,6 @@ FirebaseApp.init();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
@@ -35,5 +33,4 @@ root.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </StrictMode>
 );

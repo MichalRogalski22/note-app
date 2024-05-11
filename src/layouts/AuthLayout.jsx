@@ -24,7 +24,7 @@ const AuthLayout = ({ children }) => {
     <div className={s.root}>
       {header}
       <div className={s.leftSection}>{children}</div>
-      <div className={`${s.rightSection} d-none d-lg-flex`}>{background}</div>
+      <div className={`${s.rightSection} d-none d-lg-flex ,`}>{background}</div>
     </div>
   );
 };

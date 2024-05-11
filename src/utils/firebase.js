@@ -1,7 +1,7 @@
 import { firebaseConfig } from "config";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore  } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 export class FirebaseApp {
   static firebaseApp = undefined;
