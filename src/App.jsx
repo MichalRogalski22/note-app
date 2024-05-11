@@ -9,7 +9,7 @@ import { withAuthRequired } from "hoc/withAuthRequired";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
 import { FirebaseApp } from "utils/firebase";
 
-export function App(props) {
+export function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isIndexPage = window.location.pathname === "/";
