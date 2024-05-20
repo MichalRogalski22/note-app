@@ -12,7 +12,8 @@ const NoteCreate = () => {
       ...formValues,
       created_at: new Date().toLocaleDateString(),
     });
-    dispatch(addNote(createdNote))
+    console.log(createdNote);
+    dispatch(addNote(createdNote.note));
     navigate("/");
   };
 

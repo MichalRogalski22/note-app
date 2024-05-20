@@ -22,7 +22,7 @@ export function App() {
   useEffect(() => {
     FirebaseApp.auth.onAuthStateChanged((user) => {
       if (user.uid) {
-        const unsub = NoteAPI.onShouldSynchronizeNotes(fetchNotes());
+        const unsub = NoteAPI.onShouldSynchronizeNotes(fetchNotes);
         return () => {
           unsub();
         };

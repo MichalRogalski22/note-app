@@ -4,6 +4,7 @@ import s from "./style.module.css";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
 import { ValidatorService } from "utils/validator";
 import FieldError from "components/FieldError/FieldError";
+import { toast } from "utils/sweet-alert";
 
 const VALIDATOR = {
   title: (value) => {
@@ -25,6 +26,7 @@ const NoteForm = ({
   const [formValues, setFormValues] = useState({
     title: note?.title || "",
     content: note?.content || "",
+    img: note?.img || "",
   });
   const [formErrors, setFormErrors] = useState({
     title: note?.title ? undefined : true,
@@ -39,6 +41,19 @@ const NoteForm = ({
       [name]: value,
     });
     validate(name, value);
+  };
+
+  const updateFormImage = (e) => {
+    const fileExtension = e.target.files[0].name.split(".").at(-1).toLowerCase();
+    if (["jpg", "png", "gif"].includes(fileExtension)) {
+      setFormValues({ ...formValues, img: e.target.files[0] });
+    } else {
+      setFormValues({ ...formValues, img: undefined });
+      toast(
+        "error",
+        `Unsupported file extension ".${fileExtension}". Please send file with .jpg, .png and .gif extension`
+      );
+    }
   };
 
   const validate = (fieldName, fieldValue) => {
@@ -97,6 +112,20 @@ const NoteForm = ({
       <FieldError msg={formErrors.content} />
     </div>
   );
+
+  const imageInput = (
+    <div className="mb-5">
+      <label className="form-label">Image</label>
+      <input
+        type="file"
+        accept="image/*"
+        name="img"
+        onChange={updateFormImage}
+        className="form-control"
+      />
+    </div>
+  );
+
   const submitButton = (
     <div className={s.submit_btn}>
       <ButtonPrimary
@@ -122,6 +151,9 @@ const NoteForm = ({
       </div>
       <div className="mb-3">
         {isEditable ? contentInput : <pre>{note.content}</pre>}
+      </div>
+      <div className="mb-3">
+        {isEditable ? imageInput : note.img && <img className="mw-100 mh-100" src={note.img} alt={`note ${note.title} attachment`} />}
       </div>
       {onSubmit && submitButton}
     </div>
