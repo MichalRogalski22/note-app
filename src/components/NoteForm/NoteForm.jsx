@@ -150,7 +150,7 @@ const NoteForm = ({
         {isEditable && titleInput}
       </div>
       <div className="mb-3">
-        {isEditable ? contentInput : <pre>{note.content}</pre>}
+        {isEditable ? contentInput : <pre className={s.content}>{note.content}</pre>}
       </div>
       <div className="mb-3">
         {isEditable ? imageInput : note.img && <img className="mw-100 mh-100" src={note.img} alt={`note ${note.title} attachment`} />}
