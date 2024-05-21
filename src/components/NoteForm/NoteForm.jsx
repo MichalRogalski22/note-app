@@ -44,7 +44,10 @@ const NoteForm = ({
   };
 
   const updateFormImage = (e) => {
-    const fileExtension = e.target.files[0].name.split(".").at(-1).toLowerCase();
+    const fileExtension = e.target.files[0].name
+      .split(".")
+      .at(-1)
+      .toLowerCase();
     if (["jpg", "png", "gif"].includes(fileExtension)) {
       setFormValues({ ...formValues, img: e.target.files[0] });
     } else {
@@ -69,6 +72,10 @@ const NoteForm = ({
         return true;
       }
     }
+  };
+
+  const updateContentInputSize = (e) => {
+    e.target.style.height = e.target.scrollHeight + "px";
   };
 
   const actionIcons = (
@@ -102,8 +109,12 @@ const NoteForm = ({
     <div className="mb-5">
       <label className="form-label">Content</label>
       <textarea
-        onChange={updateFormValues}
+        onChange={(e) => {
+          updateFormValues(e);
+          updateContentInputSize(e);
+        }}
         type="text"
+        style={{ overflowY: "hidden" }}
         name="content"
         className="form-control"
         row="5"
@@ -150,10 +161,22 @@ const NoteForm = ({
         {isEditable && titleInput}
       </div>
       <div className="mb-3">
-        {isEditable ? contentInput : <pre className={s.content}>{note.content}</pre>}
+        {isEditable ? (
+          contentInput
+        ) : (
+          <pre className={s.content}>{note.content}</pre>
+        )}
       </div>
       <div className="mb-3">
-        {isEditable ? imageInput : note.img && <img className="mw-100 mh-100" src={note.img} alt={`note ${note.title} attachment`} />}
+        {isEditable
+          ? imageInput
+          : note.img && (
+              <img
+                className="mw-100 mh-100"
+                src={note.img}
+                alt={`note ${note.title} attachment`}
+              />
+            )}
       </div>
       {onSubmit && submitButton}
     </div>
