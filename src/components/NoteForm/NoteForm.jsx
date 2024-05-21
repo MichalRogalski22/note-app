@@ -79,16 +79,22 @@ const NoteForm = ({
   };
 
   const actionIcons = (
-    <>
-      <div className="col-1">
-        {onClickEdit && <PencilFill className={s.icon} onClick={onClickEdit} />}
+    <div className="col-3 d-flex flex-direction-row gap-3 justify-content-end">
+      <div>
+        {onClickEdit && (
+          <PencilFill
+            color={isEditable ? "green" : "black"}
+            className={s.icon}
+            onClick={onClickEdit}
+          />
+        )}
       </div>
-      <div className="col-1">
+      <div>
         {onClickDelete && (
           <TrashFill className={s.icon} onClick={onClickDelete} />
         )}
       </div>
-    </>
+    </div>
   );
 
   const titleInput = (
@@ -98,7 +104,7 @@ const NoteForm = ({
         onChange={updateFormValues}
         type="text"
         name="title"
-        className="form-control"
+        className="form-control h-auto"
         value={formValues.title}
       />
       <FieldError msg={formErrors.title} />
@@ -114,10 +120,10 @@ const NoteForm = ({
           updateContentInputSize(e);
         }}
         type="text"
+        rows={1}
         style={{ overflowY: "hidden" }}
         name="content"
         className="form-control"
-        row="5"
         value={formValues.content}
       />
       <FieldError msg={formErrors.content} />
@@ -151,7 +157,7 @@ const NoteForm = ({
   return (
     <div className={s.container}>
       <div className="row justify-content-space-between">
-        <div className="col-10">
+        <div className="col-9">
           <h2 className="mb-2">{title}</h2>
         </div>
         {actionIcons}
