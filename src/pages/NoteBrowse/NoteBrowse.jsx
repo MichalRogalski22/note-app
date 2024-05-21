@@ -19,7 +19,7 @@ export function NoteBrowse() {
   return (
     <>
       <div className="row justify-content-center mb-5">
-        <div className="col-sm-12 col-md-4">
+        <div className="col-sm-12 col-md-8 col-lg-6">
           <SearchBar
             onTextChange={setSearchTerm}
             placeholder="Search your notes..."

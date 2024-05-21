@@ -2,6 +2,18 @@
   padding: 50px;
 }
 
+@media screen and (max-width: 1000px) {
+  .workspace {
+    padding: 35px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .workspace {
+    padding: 25px;
+  }
+}
+
 .buttonAdd {
   z-index: 3;
   width: 50px;
