@@ -6,7 +6,7 @@ const SearchBar = ({ onTextChange, placeholder }) => {
   return (
     <>
       <SearchIcon size={25} className={s.icon} />
-      <Input onTextChange={onTextChange} placeholder={placeholder} />
+      <Input onTextChange={onTextChange} placeholder={placeholder} hasIcon />
     </>
   );
 };
