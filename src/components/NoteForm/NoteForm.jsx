@@ -34,8 +34,8 @@ const NoteForm = ({
   });
 
   const updateFormValues = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const name = e.currentTarget.getAttribute("name");
+    const value = e.currentTarget.textContent;
     setFormValues({
       ...formValues,
       [name]: value,
@@ -74,10 +74,6 @@ const NoteForm = ({
     }
   };
 
-  const updateContentInputSize = (e) => {
-    e.target.style.height = e.target.scrollHeight + "px";
-  };
-
   const actionIcons = (
     <div className="col-3 d-flex flex-direction-row gap-3 justify-content-end">
       <div>
@@ -114,18 +110,20 @@ const NoteForm = ({
   const contentInput = (
     <div className="mb-5">
       <label className="form-label">Content</label>
-      <textarea
-        onChange={(e) => {
-          updateFormValues(e);
-          updateContentInputSize(e);
-        }}
-        type="text"
-        rows={1}
-        style={{ overflowY: "hidden" }}
-        name="content"
-        className="form-control"
-        value={formValues.content}
-      />
+      <p>
+        <span
+          onInput={(e) => {
+            updateFormValues(e);
+          }}
+          contentEditable={true}
+          suppressContentEditableWarning={true}
+          role="textbox"
+          name="content"
+          className="form-control"
+        >
+          {formValues.content}
+        </span>
+      </p>
       <FieldError msg={formErrors.content} />
     </div>
   );
