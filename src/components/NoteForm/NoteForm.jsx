@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
 import { ValidatorService } from "utils/validator";
 import FieldError from "components/FieldError/FieldError";
 import { toast } from "utils/sweet-alert";
+import { TextareaAutosize } from "@mui/base";
 
 const VALIDATOR = {
   title: (value) => {
@@ -34,8 +35,8 @@ const NoteForm = ({
   });
 
   const updateFormValues = (e) => {
-    const name = e.currentTarget.getAttribute("name");
-    const value = e.currentTarget.textContent;
+    const name = e.target.name;
+    const value = e.target.value;
     setFormValues({
       ...formValues,
       [name]: value,
@@ -110,20 +111,14 @@ const NoteForm = ({
   const contentInput = (
     <div className="mb-5">
       <label className="form-label">Content</label>
-      <p>
-        <span
-          onInput={(e) => {
-            updateFormValues(e);
-          }}
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          role="textbox"
-          name="content"
-          className="form-control"
-        >
-          {formValues.content}
-        </span>
-      </p>
+      <TextareaAutosize
+        onChange={(e) => {
+          updateFormValues(e);
+        }}
+        name="content"
+        className="form-control"
+        value={formValues.content}
+      />
       <FieldError msg={formErrors.content} />
     </div>
   );
