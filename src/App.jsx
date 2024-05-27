@@ -8,6 +8,8 @@ import s from "./style.module.css";
 import { withAuthRequired } from "hoc/withAuthRequired";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
 import { FirebaseApp } from "utils/firebase";
+import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 export function App() {
   const dispatch = useDispatch();
@@ -42,6 +44,8 @@ export function App() {
       <div className={s.workspace}>
         <Outlet />
       </div>
+      <SpeedInsights />
+      <Analytics />
     </div>
   );
 }
